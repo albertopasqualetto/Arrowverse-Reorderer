@@ -4,6 +4,11 @@ The aim of this project is ordering all the Arrowverse tv series episodes to wat
 
 This package scans for media in provided folders using [mnamer](https://pypi.org/project/mnamer/), then it prepends to all Arrowverse episodes its order number based on [Arrowverse Episode Order](https://arrowverse.info/) website and moves all the episodes to a new folder.
 
+## Install
+```
+pip install arrowverse-reorderer
+```
+
 ## Usage
 ```
 usage: arrowverse-reorderer [-h] [-dm] [-dr] [-dest [DESTINATION_PATH]] [FOLDERS ...]
