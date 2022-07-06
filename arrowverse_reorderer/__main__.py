@@ -12,6 +12,7 @@ import shutil
 def main():
 	# parse arguments
 	parser = argparse.ArgumentParser(description='Order Arrowverse episodes files in air time order.')
+	parser.add_argument('-sm', '--skip-rename', action="store_true", default=False, help='skips rename of files')
 	parser.add_argument('-dm', '--dry-run-rename', action="store_true", default=False, help='does not really rename files, just prints them (and then exits, equivalent to "mnamer --test")')
 	parser.add_argument('-dr', '--dry-run-reorder', action="store_true", default=False, help='does not really reorder files, just prints them')
 	parser.add_argument('-dest', '--destination-path', nargs='?', default="", type=str, help='destination folder')
@@ -30,13 +31,15 @@ def main():
 		name_dest_folder= os.path.basename(args.destination_path)
 
 	# rename files with mnamer
-	if not args.dry_run_rename :
+	if (not args.skip_rename) and (not args.dry_run_rename) :
 		for folder in folders:
 			os.system("mnamer -b -r --no-guess --episode-format=\"{series} - S{season:02}E{episode:02} - {title}{extension}\" --ignore=\"(\\\\"+name_dest_folder+"\\\\)|(\/"+name_dest_folder+"\/)\" "+folder)
-	else:
+	elif (not args.skip_rename) and args.dry_run_rename :
 		for folder in folders:
 			os.system("mnamer -b -r --no-guess --episode-format=\"{series} - S{season:02}E{episode:02} - {title}{extension}\" --ignore=\"(\\\\"+name_dest_folder+"\\\\)|(\/"+name_dest_folder+"\/)\" --test "+folder)
-			return 0
+			return 0	# exit after dry run
+	else :
+		print("Skipping rename")
 
 	# reorder files
 	destination_path=args.destination_path

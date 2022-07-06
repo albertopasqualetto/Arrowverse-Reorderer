@@ -11,7 +11,7 @@ pip install arrowverse-reorderer
 
 ## Usage
 ```
-usage: arrowverse-reorderer [-h] [-dm] [-dr] [-dest [DESTINATION_PATH]] [FOLDERS ...]
+usage: arrowverse-reorderer [-h] [-sm] [-dm] [-dr] [-dest [DESTINATION_PATH]] [FOLDERS ...]
 
 Order Arrowverse episodes files in air time order.
 
@@ -20,6 +20,7 @@ positional arguments:
 
 options:
   -h, --help: show this help message and exit
+  -sm, --skip-rename: skips rename of files
   -dm, --dry-run-rename: does not really rename files, just prints them (and then exits, equivalent to "mnamer --test")
   -dr, --dry-run-reorder: does not really reorder files, just prints them
   -dest [DESTINATION_PATH], --destination-path [DESTINATION_PATH]: destination folder
