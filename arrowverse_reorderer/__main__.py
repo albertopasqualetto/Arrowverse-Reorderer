@@ -25,6 +25,11 @@ def main():
 	if folders==[]:
 		folders.append(os.getcwd())
 
+	for folder in folders:
+		if not os.path.exists(folder):
+			print("Folder "+folder+" does not exist")
+			sys.exit(1)
+
 	# if no destination folder is given, use current directory
 	name_dest_folder="reordered"
 	if args.destination_path!="":
