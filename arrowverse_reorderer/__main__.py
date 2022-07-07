@@ -89,6 +89,16 @@ def reorder(folders, name_dest_folder, destination_path, dry_run=False):
 				if not dry_run:
 					shutil.move(file, os.path.join(destination_path, number+" - "+series+" - "+episode+" - "+end))
 				print(file+" moved")
+		
+
+		# if (sub)folder is empty, delete it
+		for subfolder in os.listdir(folder):
+			if len(os.listdir(subfolder))==0:
+				os.rmdir(subfolder)
+				print("Folder "+subfolder+" deleted\n")
+		if len(os.listdir(folder))==0:
+			os.rmdir(folder)
+			print("Folder "+folder+" deleted\n")
 
 if __name__ == '__main__':
 	sys.exit(main())
