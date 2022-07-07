@@ -75,9 +75,9 @@ def reorder(folders, name_dest_folder, destination_path, dry_run=False):
 
 	# for each file in directories, move to new directory
 	for folder in folders:
-		for file in glob.glob(os.path.join(folder,"*[!"+name_dest_folder+"]","*"), recursive=True):
+		for file in glob.glob(os.path.join(folder,"**"), recursive=True):
 			# if file is a video
-			if (filetype.is_video(file) and len(os.path.basename(file).split(" - "))==3):	# if file is a video and its name is in the format * - * - *
+			if (os.path.isfile(file) and not name_dest_folder in file) and (filetype.is_video(file) and len(os.path.basename(file).split(" - "))==3):	# if file is a video and its name is in the format * - * - *
 				series= os.path.basename(file).split(" - ")[0]
 				episode= os.path.basename(file).split(" - ")[1]
 				end= os.path.basename(file).split(" - ")[2]
