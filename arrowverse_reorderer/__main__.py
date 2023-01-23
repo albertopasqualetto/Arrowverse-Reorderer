@@ -1,3 +1,5 @@
+# TODO add file without title reordering
+
 import argparse
 from importlib.metadata import version
 import sys
@@ -38,10 +40,10 @@ def main():
 	# rename files with mnamer
 	if (not args.skip_rename) and (not args.dry_run_rename) :
 		for folder in folders:
-			os.system("mnamer -b -r --no-guess --episode-format=\"{series} - S{season:02}E{episode:02} - {title}{extension}\" --ignore=\"(\\\\"+name_dest_folder+"\\\\)|(\/"+name_dest_folder+"\/)\" "+folder)
+			os.system("mnamer -b -r --no-guess --no-overwrite --episode-format=\"{series} - S{season:02}E{episode:02} - {title}{extension}\" --ignore=\"(\\\\"+name_dest_folder+"\\\\)|(\/"+name_dest_folder+"\/)\" "+folder)
 	elif (not args.skip_rename) and args.dry_run_rename :
 		for folder in folders:
-			os.system("mnamer -b -r --no-guess --episode-format=\"{series} - S{season:02}E{episode:02} - {title}{extension}\" --ignore=\"(\\\\"+name_dest_folder+"\\\\)|(\/"+name_dest_folder+"\/)\" --test "+folder)
+			os.system("mnamer -b -r --no-guess --no-overwrite --episode-format=\"{series} - S{season:02}E{episode:02} - {title}{extension}\" --ignore=\"(\\\\"+name_dest_folder+"\\\\)|(\/"+name_dest_folder+"\/)\" --test "+folder)
 			return 0	# exit after dry run
 	else :
 		print("Skipping rename")
