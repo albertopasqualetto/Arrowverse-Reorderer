@@ -104,7 +104,7 @@ def reorder(folders, name_dest_folder, destination_path, dry_run=False):
 
 		# if (sub)folder is empty, delete it
 		for subfolder in os.listdir(folder):
-			if not os.isdir(subfolder):
+			if not os.path.isdir(subfolder):
 				continue
 			if len(os.listdir(subfolder)) == 0:
 				os.rmdir(subfolder)
