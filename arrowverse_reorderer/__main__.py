@@ -78,10 +78,9 @@ def reorder(folders, name_dest_folder, destination_path, dry_run=False):
 		os.makedirs(destination_path)
 
 	# get Arrowverse order from website
-	url = "https://arrowverse.info"
-	df = pd.read_html(requests.get(url).content)[-1]
-	del df["Original Air Date"]
-	del df["Source"]
+	url = "https://arrowverse.info/api"
+	df = pd.DataFrame(requests.get(url).json())
+	del df["air_date"]
 
 	# for each file in directories, move to new directory
 	for folder in folders:
@@ -94,9 +93,9 @@ def reorder(folders, name_dest_folder, destination_path, dry_run=False):
 
 				series = to_change[series] if series in to_change else series
 
-				row_df = df.loc[(df['Series'] == series) & (df['Episode'] == episode)]
+				row_df = df.loc[(df['series'] == series) & (df['episode_id'] == episode)]
 				row = json.loads(row_df.to_json(orient="records"))[0]
-				number = str(row['#']).zfill(3)
+				number = str(row['row_number']).zfill(3)
 
 				if not dry_run:
 					shutil.move(file, os.path.join(destination_path, number+" - "+series+" - "+episode+" - "+end))
