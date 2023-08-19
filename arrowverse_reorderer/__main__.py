@@ -12,6 +12,11 @@ import filetype
 import shutil
 
 
+to_change = {
+	"Superman and Lois": "Superman & Lois"
+}
+
+
 def main():
 	# parse arguments
 	parser = argparse.ArgumentParser(description='Order Arrowverse episodes files in air time order.')
@@ -86,6 +91,8 @@ def reorder(folders, name_dest_folder, destination_path, dry_run=False):
 				series = os.path.basename(file).split(" - ")[0]
 				episode = os.path.basename(file).split(" - ")[1]
 				end = ' '.join(os.path.basename(file).split(" - ")[2:])
+
+				series = to_change[series] if series in to_change else series
 
 				row_df = df.loc[(df['Series'] == series) & (df['Episode'] == episode)]
 				row = json.loads(row_df.to_json(orient="records"))[0]
