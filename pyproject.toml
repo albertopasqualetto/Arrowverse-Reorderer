@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "arrowverse_reorderer"
-version = "2.3.0"
+version = "2.4.0"
 authors = [
 	{ name="Alberto Pasqualetto", email="39854348+albertopasqualetto@users.noreply.github.com" },
 ]
