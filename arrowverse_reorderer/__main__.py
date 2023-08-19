@@ -70,9 +70,9 @@ to	000 - Series - SXXEXX - Title.*
 
 get arrowverse order from website
 get all filenames
-move them to another directory and rename them by prepending "#" column to old filename getting it from the line Series and Title
+move them to another directory and rename them by prepending "row_number" column to old filename getting it from the line with the corresponding Series and Title
 """
-def reorder(folders, name_dest_folder, destination_path, dry_run=False):
+def reorder(folders: list[str | os.PathLike], name_dest_folder: str, destination_path: str | os.PathLike, dry_run: bool = False) -> None:
 	# set and create destination folder
 	if not os.path.exists(destination_path):
 		os.makedirs(destination_path)
