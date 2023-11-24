@@ -13,7 +13,8 @@ import shutil
 
 
 to_change = {
-	"Superman and Lois": "Superman & Lois"
+	"Superman and Lois": "Superman & Lois",
+	"DC's Stargirl": "Stargirl"
 }
 
 
@@ -93,13 +94,13 @@ def reorder(folders: list[str | os.PathLike], name_dest_folder: str, destination
 
 				series = to_change[series] if series in to_change else series
 
-				row_df = df.loc[(df['series'] == series) & (df['episode_id'] == episode)]
+				row_df = df.loc[(df['series'].str.lower().str.contains(series.lower()) & (df['episode_id'] == episode))]
 				row = json.loads(row_df.to_json(orient="records"))[0]
 				number = str(row['row_number']).zfill(3)
 
 				if not dry_run:
 					shutil.move(file, os.path.join(destination_path, number+" - "+series+" - "+episode+" - "+end))
-				print(file+" moved")
+				print(file, "moved")
 
 		# if (sub)folder is empty, delete it
 		for subfolder in os.listdir(folder):
